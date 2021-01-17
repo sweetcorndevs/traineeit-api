@@ -25,15 +25,14 @@ class Usuario_AulaSerializer(serializers.ModelSerializer):
 
 class CursoLeituraSerializer(serializers.ModelSerializer):
     aulas = AulaSerializer(many=True, read_only=False)
-    dadosusuario = AulaSerializer(many=True, read_only=False)
     class Meta:
         model = Curso
-        fields = ('id', 'nome', 'descricao', 'totaldehoras', 'datahora', 'aulas', 'dadosusuario')
+        fields = ('id', 'nome', 'descricao', 'totaldehoras', 'datahora', 'aulas')
 
 class CursoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Curso
-        fields = ('id', 'nome', 'descricao', 'totaldehoras', 'datahora', 'aulas', 'dadosusuario')
+        fields = ('id', 'nome', 'descricao', 'totaldehoras', 'datahora', 'aulas')
 
 class UsuarioLeituraSerializer(serializers.ModelSerializer):
     cursos = CursoSerializer(many=True, read_only=False)
