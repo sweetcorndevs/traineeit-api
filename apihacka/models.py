@@ -19,7 +19,6 @@ class Aula(models.Model):
     datahora = models.DateTimeField(blank=True)
     linkmeet = models.CharField(max_length=500, blank=True)
     curso = models.ForeignKey("Curso", blank=True, on_delete=models.CASCADE, related_name='+')
-    relacaoaluno = models.ForeignKey("Usuario_Aula", blank=True, on_delete=models.CASCADE, related_name='+')
     
 
     def __str__(self):
@@ -43,6 +42,7 @@ class Curso(models.Model):
     datahora = models.DateTimeField(blank=True)
     totaldehoras = models.IntegerField(max_length=4, blank=True)
     aulas = models.ManyToManyField(Aula, blank=True, related_name='aula')
+    dadosusuario = models.ManyToManyField("Curso", blank=True, related_name='aula')
 
 
     def __str__(self):
