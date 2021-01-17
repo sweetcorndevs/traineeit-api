@@ -32,3 +32,9 @@ class UsuarioLeituraViewset(viewsets.ModelViewSet):
 class CursoLeituraViewset(viewsets.ModelViewSet):
     queryset = models.Curso.objects.all()
     serializer_class = serializers.CursoLeituraSerializer
+
+class LoginViewset(viewsets.ModelViewSet):
+    queryset = models.Usuario.objects.all()
+    serializer_class = serializers.LoginSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ["googleid"]

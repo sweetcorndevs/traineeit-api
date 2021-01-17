@@ -39,6 +39,10 @@ class UsuarioSerializer(serializers.ModelSerializer):
         model = Usuario
         fields = ('id', 'tipousuario', 'nome', 'email', 'googleid', 'cursos')
 
+class LoginSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Usuario
+        fields = ('id', 'tipousuario', 'email')
 
 
         

@@ -1,4 +1,4 @@
-from apihacka.viewsets import UsuarioViewset, CursoViewset, AulaViewset, Usuario_AulaViewset, UsuarioLeituraViewset, CursoLeituraViewset
+from apihacka.viewsets import UsuarioViewset, CursoViewset, AulaViewset, Usuario_AulaViewset, UsuarioLeituraViewset, CursoLeituraViewset, LoginViewset
 from rest_framework import routers
 
 router = routers.DefaultRouter()
@@ -8,5 +8,6 @@ router.register('aula', AulaViewset)
 router.register('usuarioaula', Usuario_AulaViewset)
 router.register('usuarioleitura', UsuarioLeituraViewset)
 router.register('cursoleitura', CursoLeituraViewset)
+router.register('login', LoginViewset)
 
 
