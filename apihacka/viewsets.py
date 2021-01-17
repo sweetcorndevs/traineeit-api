@@ -1,7 +1,8 @@
 from rest_framework import viewsets
 from . import models
 from . import serializers
-from rest_framework import filters
+from django_filters.rest_framework import DjangoFilterBackend
+
 
 
 class UsuarioViewset(viewsets.ModelViewSet):
@@ -15,6 +16,9 @@ class AulaViewset(viewsets.ModelViewSet):
 class Usuario_AulaViewset(viewsets.ModelViewSet):
     queryset = models.Usuario_Aula.objects.all()
     serializer_class = serializers.Usuario_AulaSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ["curso"]
+
 
 class CursoViewset(viewsets.ModelViewSet):
     queryset = models.Curso.objects.all()

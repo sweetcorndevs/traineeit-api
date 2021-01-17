@@ -14,6 +14,7 @@ class Usuario_AulaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario_Aula
         fields = ('curso', 'aula', 'aluno',  'presente', 'nota', 'linkaluno')
+        
 
 
 class CursoLeituraSerializer(serializers.ModelSerializer):
