@@ -31,12 +31,12 @@ class UsuarioLeituraSerializer(serializers.ModelSerializer):
     cursos = CursoSerializer(many=True, read_only=False)
     class Meta:
         model = Usuario
-        fields = ('id', 'nome', 'email', 'googleid', 'cursos')
+        fields = ('id', 'tipousuario', 'nome', 'email', 'googleid', 'cursos')
 
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
-        fields = ('id', 'nome', 'email', 'googleid', 'cursos')
+        fields = ('id', 'tipousuario', 'nome', 'email', 'googleid', 'cursos')
 
 
 

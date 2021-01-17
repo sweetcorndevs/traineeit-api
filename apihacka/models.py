@@ -8,6 +8,12 @@ choice = [
     ('Não', 'Não'),
 ]
 
+tipo = [
+    ('Aluno', 'Aluno'),
+    ('Empresa', 'Empresa'),
+    ('Professor', 'Professor'),
+]
+
 
 
 class Aula(models.Model):
@@ -49,7 +55,9 @@ class Usuario(models.Model):
     nome = models.CharField(max_length=255, blank=True)
     email = models.CharField(max_length=255, blank=True)
     googleid = models.CharField(max_length=500, blank=True)
+    tipousuario = models.CharField(max_length=255, choices=tipo, blank=True)
     cursos = models.ManyToManyField('Curso', blank=True)
+    
 
     def __str__(self):
         return self.nome
