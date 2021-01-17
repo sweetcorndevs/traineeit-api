@@ -43,6 +43,7 @@ class Curso(models.Model):
     nome = models.CharField(max_length=255, blank=True)
     descricao = models.TextField(max_length=255, blank=True)
     datahora = models.DateTimeField(blank=True)
+    totaldehoras = models.IntegerField(max_length=4, blank=True)
     aulas = models.ManyToManyField(Aula, blank=True, related_name='aula')
 
     def __str__(self):
