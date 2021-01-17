@@ -29,7 +29,7 @@ class Aula(models.Model):
 
 
 class Usuario_Aula(models.Model):
-    presente = models.CharField(max_length=255, choices=choice, blank=True)
+    presente = models.BooleanField(default=False)
     nota = models.IntegerField(max_length=2, blank=True)
     linkaluno = models.CharField(max_length=500, blank=True)
     aluno = models.ForeignKey("Usuario", blank=True, on_delete=models.CASCADE)

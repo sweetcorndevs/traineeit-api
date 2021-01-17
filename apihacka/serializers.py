@@ -7,10 +7,15 @@ class AulaSerializer(serializers.ModelSerializer):
         model = Aula
         fields = ('nome', 'datahora', 'linkmeet', 'curso')
 
-
-class Usuario_AulaSerializer(serializers.ModelSerializer):
+class Usuario_AulaLeituraSerializer(serializers.ModelSerializer):
     aula = serializers.StringRelatedField()
     aluno = serializers.StringRelatedField()
+    class Meta:
+        model = Usuario_Aula
+        fields = ('curso', 'aula', 'aluno',  'presente', 'nota', 'linkaluno')
+
+
+class Usuario_AulaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario_Aula
         fields = ('curso', 'aula', 'aluno',  'presente', 'nota', 'linkaluno')
