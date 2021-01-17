@@ -5,9 +5,10 @@ from .models import Usuario, Curso, Aula, Usuario_Aula
 class AulaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Aula
-        fields = ('nome', 'datahora', 'linkmeet', 'curso')
+        fields = ('id', 'nome', 'datahora', 'linkmeet', 'curso')
 
 class Usuario_AulaLeituraSerializer(serializers.ModelSerializer):
+    curso = serializers.StringRelatedField()
     aula = serializers.StringRelatedField()
     aluno = serializers.StringRelatedField()
     class Meta:

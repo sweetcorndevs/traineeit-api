@@ -42,7 +42,6 @@ class Curso(models.Model):
     datahora = models.DateTimeField(blank=True)
     totaldehoras = models.IntegerField(max_length=4, blank=True)
     aulas = models.ManyToManyField(Aula, blank=True, related_name='aula')
-    dadosusuario = models.ManyToManyField("Curso", blank=True, related_name='aula')
 
 
     def __str__(self):

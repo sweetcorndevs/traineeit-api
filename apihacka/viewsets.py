@@ -38,7 +38,7 @@ class Usuario_AulaLeituraViewset(viewsets.ModelViewSet):
     queryset = models.Usuario_Aula.objects.all().order_by('aula')
     serializer_class = serializers.Usuario_AulaLeituraSerializer
     filter_backends = (DjangoFilterBackend,)
-    filter_fields = ["curso"]
+    filter_fields = ["curso", "aula"]
 
 class LoginViewset(viewsets.ModelViewSet):
     queryset = models.Usuario.objects.all()
