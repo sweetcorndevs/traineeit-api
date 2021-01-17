@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 # Create your models here.
 
@@ -7,30 +8,50 @@ choice = [
     ('Não', 'Não'),
 ]
 
-class Usuario(models.Model):
-    nome = models.CharField(max_length=255, blank=True)
-    email = models.CharField(max_length=255, blank=True)
-    googleid = models.CharField(max_length=500, blank=True)
-
-class Curso(models.Model):
-    nome = models.CharField(max_length=255, blank=True)
-    descricao = models.TextField(max_length=255, blank=True)
-    datahora = models.DateField(max_length=200, blank=True)
-
-class Usuario_Curso(models.Model):
-    id_usuario = models.ForeignKey(Usuario, default=None, on_delete=models.CASCADE)
-    id_curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
 
 
 class Aula(models.Model):
     nome = models.CharField(max_length=255, blank=True)
-    datahora = models.DateField(max_length=200, blank=True)
+    descricao = models.TextField(max_length=255, blank=True)
+    datahora = models.DateTimeField(blank=True)
     linkmeet = models.CharField(max_length=500, blank=True)
-    id_curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+    curso = models.ForeignKey("Curso", blank=True, on_delete=models.CASCADE)
+    
+
+    def __str__(self):
+        return self.nome
+
 
 class Usuario_Aula(models.Model):
     presente = models.CharField(max_length=255, choices=choice, blank=True)
     nota = models.IntegerField(max_length=2, blank=True)
     linkaluno = models.CharField(max_length=500, blank=True)
-    id_aula = models.ForeignKey(Aula, on_delete=models.CASCADE)
-    id_usuario = models.ForeignKey(Usuario, default=None, on_delete=models.CASCADE)
+    aluno = models.ForeignKey("Usuario", blank=True, on_delete=models.CASCADE)
+    aula = models.ForeignKey("Aula", blank=True, on_delete=models.CASCADE)
+    curso = models.ForeignKey("Curso", blank=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.aluno
+
+class Curso(models.Model):
+    nome = models.CharField(max_length=255, blank=True)
+    descricao = models.TextField(max_length=255, blank=True)
+    datahora = models.DateTimeField(blank=True)
+    aulas = models.ManyToManyField(Aula, blank=True, related_name='aula')
+
+    def __str__(self):
+        return self.nome
+
+    def natural_key(self):
+        return self.aulas
+
+class Usuario(models.Model):
+    nome = models.CharField(max_length=255, blank=True)
+    email = models.CharField(max_length=255, blank=True)
+    googleid = models.CharField(max_length=500, blank=True)
+    cursos = models.ManyToManyField('Curso', blank=True)
+
+    def __str__(self):
+        return self.nome
+
+

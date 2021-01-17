@@ -1,27 +1,44 @@
 from rest_framework import serializers
-from .models import Usuario, Curso, Usuario_Curso, Aula, Usuario_Aula
+from .models import Usuario, Curso, Aula, Usuario_Aula
 
-class UsuarioSerializer(serializers.ModelSerializer):
+        
+class AulaSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Usuario
-        fields = ('id', 'nome', 'email', 'googleid')
+        model = Aula
+        fields = ('nome', 'datahora', 'linkmeet', 'curso')
+
+
+class Usuario_AulaSerializer(serializers.ModelSerializer):
+    aula = serializers.StringRelatedField()
+    aluno = serializers.StringRelatedField()
+    class Meta:
+        model = Usuario_Aula
+        fields = ('curso', 'aula', 'aluno',  'presente', 'nota', 'linkaluno')
+
+
+class CursoLeituraSerializer(serializers.ModelSerializer):
+    aulas = AulaSerializer(many=True, read_only=False)
+    class Meta:
+        model = Curso
+        fields = ('id', 'nome', 'descricao', 'datahora', 'aulas')
 
 class CursoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Curso
-        fields = ('id', 'nome', 'descricao', 'datahora')
+        fields = ('id', 'nome', 'descricao', 'datahora', 'aulas')
 
-class Usuario_CursoSerializer(serializers.ModelSerializer):
+class UsuarioLeituraSerializer(serializers.ModelSerializer):
+    cursos = CursoSerializer(many=True, read_only=False)
     class Meta:
-        model = Usuario_Curso
-        fields = ('id_usuario', 'id_curso')
+        model = Usuario
+        fields = ('id', 'nome', 'email', 'googleid', 'cursos')
 
-class AulaSerializer(serializers.ModelSerializer):
+class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Aula
-        fields = ('nome', 'datahora', 'linkmeet', 'id_curso')
+        model = Usuario
+        fields = ('id', 'nome', 'email', 'googleid', 'cursos')
 
-class Usuario_AulaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Usuario_Aula
-        fields = ('presente', 'nota', 'linkaluno', 'id_aula', 'id_usuario')
+
+
+        
+
